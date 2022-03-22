@@ -14,14 +14,28 @@ public class ProdutoController {
     @Autowired
     ProdutoRepository produtoRepository;
 
-    @GetMapping(value = "/produtos")
+    @GetMapping(value = "/produto")
     public List<Produto> listaProdutos(){
         return produtoRepository.findAll();
     }
 
-    @GetMapping(value = "/produtos/{id}")
+    @GetMapping(value = "/produto/{id}")
     public Produto produtoEspecifico(@PathVariable(value = "id") long id){
         return produtoRepository.findById(id);
     }
 
+    @PostMapping(value = "/produto")
+    public Produto salvaProduto(@RequestBody Produto produto){
+        return produtoRepository.save(produto);
+    }
+
+    @DeleteMapping(value = "/produto")
+    public void deletaProduto(@RequestBody Produto produto){
+        produtoRepository.delete(produto);
+    }
+
+    @PutMapping(value = "/produto")
+    public Produto atualizaProduto(@RequestBody Produto produto){
+        return produtoRepository.save(produto);
+    }
 }
